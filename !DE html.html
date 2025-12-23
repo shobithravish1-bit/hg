@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fun Quiz 💕</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    font-family:'Segoe UI', sans-serif;
+}
+
+body{
+    margin:0;
+    height:100vh;
+    background: linear-gradient(135deg,#ff758c,#ff7eb3);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+}
+
+.quiz-box{
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(12px);
+    padding:22px;
+    border-radius:20px;
+    width:90%;
+    max-width:360px;
+    text-align:center;
+    animation: fadeIn 1s ease;
+}
+
+h1{
+    font-size:22px;
+    margin-bottom:10px;
+}
+
+.progress{
+    font-size:13px;
+    opacity:0.9;
+    margin-bottom:12px;
+}
+
+.question{
+    font-size:18px;
+    margin-bottom:15px;
+}
+
+.options button{
+    width:100%;
+    padding:12px;
+    margin:8px 0;
+    border:none;
+    border-radius:14px;
+    background:white;
+    color:#ff5c8a;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    transition: transform 0.2s ease;
+}
+
+.options button:active{
+    transform: scale(0.95);
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="quiz-box">
+    <h1>💕 Little Fun Quiz 💕</h1>
+    <div class="progress" id="progress"></div>
+    <div class="question" id="question"></div>
+    <div class="options" id="options"></div>
+</div>
+
+<script>
+const quiz = [
+    {
+        q: "What do i want you to always remember?",
+        o: ["You are enough", "I wont ever leave you", "I love you", "All of them"]
+    },
+    {
+        q: "What do I love most about you? 💖",
+        o: ["Smile", "Eyes", "Heart", "Everything ❤️"]
+    },
+    {
+        q: "Who loves more? 😄",
+        o: ["Me", "You", "Both equally", "Obviously me 😉"]
+    },
+    {
+        q: "What do I steal from you the most? 😜",
+        o: ["You", "Your heart", "Attention", "All of these"]
+    },
+    {
+        q: "What is our forever plan?",
+        o: ["Travel together", "Grow together", "Laugh forever", "All of the above ❤️"]
+    }
+];
+
+let index = 0;
+
+const questionEl = document.getElementById("question");
+const optionsEl = document.getElementById("options");
+const progressEl = document.getElementById("progress");
+
+function loadQuestion(){
+    progressEl.innerText = `Question ${index + 1} of ${quiz.length}`;
+    questionEl.innerText = quiz[index].q;
+    optionsEl.innerHTML = "";
+
+    quiz[index].o.forEach(opt=>{
+        const btn = document.createElement("button");
+        btn.innerText = opt;
+        btn.onclick = next;
+        optionsEl.appendChild(btn);
+    });
+}
+
+function next(){
+    index++;
+    if(index < quiz.length){
+        loadQuestion();
+    } else {
+        showResult();
+    }
+}
+
+function showResult(){
+    document.querySelector(".quiz-box").innerHTML = `
+        <h1>🎉 You Finished! 🎉</h1>
+        <p style="font-size:16px; margin-top:15px;">
+           Darling no matter what you chose<br>
+            You are perfect ❤️<br><br>
+            Thanks for playing my silly quiz 🥰🥰❤️
+        </p>
+        <button onclick="goNext()"
+            style="
+                margin-top:18px;
+                padding:12px 20px;
+                border:none;
+                border-radius:14px;
+                background:white;
+                color:#ff5c8a;
+                font-size:16px;
+                font-weight:600;
+                cursor:pointer;
+            ">
+            Continue 💝
+        </button>
+    `;
+}
+
+function goNext(){
+    window.location.href = "wishes.html"; // 🔗 change if needed
+}
+
+loadQuestion();
+</script>
+
+</body>
+</html>
